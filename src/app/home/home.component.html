@@ -1,0 +1,90 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between border-0">
+    <span class="fs-3 fw-bold"> Jira Board (Drag & Drop)</span>
+
+    <button class="btn btn-primary btn-md" type="button" (click)="addTask()">
+      Add Task
+    </button>
+  </div>
+  <div class="card-body card-height">
+    <div class="row">
+      <div class="col-4">
+        <div
+          class="card"
+          (dragover)="dragOver($event)"
+          (drop)="drop($event, taskEnum.TODO)"
+        >
+          <h5 class="card-header">TO Do List</h5>
+          <div class="card-body">
+            <ol
+              class="list-group list-group-numbered"
+              *ngIf="!!toListData.length"
+            >
+              <li
+                *ngFor="let item of toListData"
+                class="list-group-item"
+                [draggable]="true"
+                (dragstart)="dragStart(item, taskEnum.TODO)"
+              >
+                {{ item?.name }}
+              </li>
+            </ol>
+            <span *ngIf="!!!toListData.length">No Records Founds</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div
+          class="card"
+          (dragover)="dragOver($event)"
+          (drop)="drop($event, taskEnum.PENDING)"
+        >
+          <h5 class="card-header">Pending List</h5>
+          <div class="card-body">
+            <ol
+              class="list-group list-group-numbered"
+              *ngIf="!!pendingList.length"
+            >
+              <li
+                *ngFor="let item of pendingList"
+                class="list-group-item"
+                [draggable]="true"
+                (dragstart)="dragStart(item, taskEnum.PENDING)"
+              >
+                {{ item?.name }}
+              </li>
+            </ol>
+            <span *ngIf="!!!pendingList.length">No Records Founds</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div
+          class="card"
+          (dragover)="dragOver($event)"
+          (drop)="drop($event, taskEnum.DONE)"
+        >
+          <h5 class="card-header">Done List</h5>
+          <div class="card-body">
+            <ol
+              class="list-group list-group-numbered"
+              *ngIf="!!doneData.length"
+            >
+              <li
+                *ngFor="let item of doneData"
+                class="list-group-item"
+                [draggable]="true"
+                (dragstart)="dragStart(item, taskEnum.DONE)"
+              >
+                {{ item?.name }}
+              </li>
+            </ol>
+            <span *ngIf="!!!doneData.length">No Records Founds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

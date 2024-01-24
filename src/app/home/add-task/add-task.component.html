@@ -1,0 +1,29 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
+    </div>
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="title" class="col-form-label"> Title:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="data.name"
+          id="title"
+        />
+        <span *ngIf="isSubmitted && !data.name" class="text-danger">
+          Please enter a title.
+        </span>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="close()">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary" (click)="save()">
+        Save
+      </button>
+    </div>
+  </div>
+</div>
