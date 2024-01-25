@@ -16,11 +16,13 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent {
   constructor(public dialog: Dialog, private toastrService: ToastrService) {}
   statusList: {
+    id: number;
     name: string;
     status: string;
   }[] = [];
   taskEnum = TaskEnum;
   currentData!: {
+    id: number;
     name: string;
     status: string;
   };
@@ -43,7 +45,7 @@ export class HomeComponent {
 
     dialogRef.closed.subscribe((res: any) => {
       if (res) {
-        this.statusList.push(res);
+        this.statusList.push({ ...res, id: this.statusList.length + 1 });
       }
     });
   }
@@ -53,9 +55,7 @@ export class HomeComponent {
   }
 
   drop(event: any, status: string) {
-    const find = this.statusList.find(
-      (ele) => ele.name === this.currentData.name
-    );
+    const find = this.statusList.find((ele) => ele.id === this.currentData.id);
 
     if (find) {
       find.status = status;
